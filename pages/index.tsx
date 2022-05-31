@@ -5,6 +5,9 @@ import Header from '../components/Header'
 import requests from '../utils/requests'
 import { Movie } from '../typings'
 import Rows from '../components/Rows'
+import { useRecoilValue } from 'recoil'
+import { modalState, movieState } from '../atoms/modalAtom'
+import ModalTrailer from '../components/ModalTrailer'
 interface Props {
   netflixOriginals: Movie[]
   trendingNow: Movie[]
@@ -25,6 +28,7 @@ const Home = ({
   romanceMovies,
   documentaries,
 }: Props) => {
+  const showModal = useRecoilValue(modalState)
   return (
     <div className="relative h-screen bg-gradient-to-b  lg:h-[140vh]">
       <Head>
@@ -47,6 +51,7 @@ const Home = ({
       </main>
 
       {/* Modal */}
+      {showModal && <ModalTrailer />}
     </div>
   )
 }
